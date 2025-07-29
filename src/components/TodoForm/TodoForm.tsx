@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useTodoStore } from "../store/useTodoStore";
+import { useTodoStore } from "../../store/useTodoStore";
+import { Form, Input, SubmitButton } from "./TodoForm.style";
 
 const TodoForm = () => {
   const [text, setText] = useState("");
@@ -13,17 +14,14 @@ const TodoForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 mb-4">
-      <input
-        className="border p-2 flex-1 rounded"
+    <Form onSubmit={handleSubmit}>
+      <Input
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Digite uma tarefa"
       />
-      <button type="submit" className="bg-blue-600 text-white px-4 rounded">
-        Adicionar
-      </button>
-    </form>
+      <SubmitButton type="submit">Adicionar</SubmitButton>
+    </Form>
   );
 };
 

@@ -1,4 +1,4 @@
-import Button from "../components/Buttons";
+import Button from "../components/Buttons/Buttons";
 import { useCounterStore } from "../store/useCounterStore";
 
 const Home = () => {
