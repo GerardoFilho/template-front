@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as S from "./TodoInput.style";
-import { useTodoStore } from "../../store/useTodoStore";
+import { useTodoStore } from "../../../store/useTodoStore";
 
 const TodoInput = () => {
   const [text, setText] = useState("");

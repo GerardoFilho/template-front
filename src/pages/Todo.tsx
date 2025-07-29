@@ -1,6 +1,6 @@
-import TodoHeader from "../components/TodoHeader/TodoHeader";
-import TodoInput from "../components/TodoInput/TodoInput";
-import TodoList from "../components/TodoList/TodoList";
+import TodoHeader from "../components/Todo/TodoHeader/TodoHeader";
+import TodoInput from "../components/Todo/TodoInput/TodoInput";
+import TodoList from "../components/Todo/TodoList/TodoList";
 
 const TodoPage = () => {
   return (

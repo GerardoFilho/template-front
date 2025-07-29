@@ -1,4 +1,4 @@
-import { useTodoStore } from "../../store/useTodoStore";
+import { useTodoStore } from "../../../store/useTodoStore";
 import TodoItem from "../TodoItem/TodoItem";
 import * as S from "./TodoList.style";
 
