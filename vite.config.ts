@@ -23,14 +23,12 @@ export default defineConfig(({ mode }) => {
       sourcemap: false,
       outDir: 'dist',
       chunkSizeWarningLimit: 600,
-      esbuild: isProd? {drop: ['console', 'debugger'],}: undefined,
+      esbuild: isProd ? { drop: ['console', 'debugger'], } : undefined,
       // rollupOptions: {
-      //   output: {
+      //   output: { // TESTER EM PRD E HML PARA SABER SE FUNCIONA NO AMBIENTE DA CAIXA
       //     manualChunks(id: string) {
       //       if (id.includes('node_modules')) {
-      //         if (id.includes('react')) return 'vendor-react';
-      //         if (id.includes('zustand')) return 'vendor-zustand';
-      //         return 'vendor';
+      //         return id.toString().split('node_modules/')[1].split('/')[0].toString();
       //       }
       //     },
       //   },
