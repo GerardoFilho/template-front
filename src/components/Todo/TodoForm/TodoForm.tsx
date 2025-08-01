@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTodoStore } from "../../store/useTodoStore";
+import { useTodoStore } from "../../../store/useTodoStore";
 import { Form, Input, SubmitButton } from "./TodoForm.style";
 
 const TodoForm = () => {
