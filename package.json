@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
+    "cxt-design-system": "file:../design-system-novo/design-system",
+    "date-fns": "^4.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.7.0",
