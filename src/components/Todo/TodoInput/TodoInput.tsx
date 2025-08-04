@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as S from "./TodoInput.style";
 import { useTodoStore } from "../../../store/useTodoStore";
+import { Button } from "cxt-design-system";
 
 const TodoInput = () => {
   const [text, setText] = useState("");
@@ -20,7 +21,8 @@ const TodoInput = () => {
         onChange={(e) => setText(e.target.value)}
         placeholder="Add a task..."
       />
-      <S.AddButton onClick={handleAdd}>+</S.AddButton>
+      {/* <S.AddButton onClick={handleAdd}>+</S.AddButton> */}
+      <Button onClick={handleAdd}>+</Button>
     </S.InputWrapper>
   );
 };

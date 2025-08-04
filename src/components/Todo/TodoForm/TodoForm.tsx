@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTodoStore } from "../../../store/useTodoStore";
-import { Form, Input, SubmitButton } from "./TodoForm.style";
+import { Form, Input } from "./TodoForm.style";
+import { Button } from "cxt-design-system";
+import { toast } from "react-toastify";
+import { useApiRequest } from "../../../hooks/useApiRequest";
 
 const TodoForm = () => {
   const [text, setText] = useState("");
   const addTodo = useTodoStore((s) => s.addTodo);
+
+  const [, setIsLoadingPage] = useState(false);
+
+  const { data, isSuccess, isPending } = useApiRequest({
+    endpoint: '/todos',
+    method: 'GET',
+    key: ['todos'],
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -13,6 +24,26 @@ const TodoForm = () => {
     setText("");
   };
 
+  const onLoading = async () => {
+    setIsLoadingPage(true);
+    if (isSuccess) {
+      //TODO : Add todos to store
+      data
+    } else {
+      toast.error('Ops, aconteceu algo inesperado, tente novamente');
+    }
+    setIsLoadingPage(false);
+  }
+
+  useEffect(() => {
+    void onLoading();
+  }, []);
+
+
+  if(isPending) return <div>Carregando...</div>
+
+
+
   return (
     <Form onSubmit={handleSubmit}>
       <Input
@@ -20,7 +51,8 @@ const TodoForm = () => {
         onChange={(e) => setText(e.target.value)}
         placeholder="Digite uma tarefa"
       />
-      <SubmitButton type="submit">Adicionar</SubmitButton>
+      <Button type="submit">Adicionar</Button>
+      {/* <SubmitButton type="submit">Adicionar</SubmitButton> */}
     </Form>
   );
 };
