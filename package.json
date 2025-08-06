@@ -18,7 +18,7 @@
     "@stitches/react": "^1.2.8",
     "@tanstack/react-query": "^5.84.1",
     "axios": "^1.11.0",
-    "cxt-design-system": "file:../design-system-novo/design-system",
+    "cxt-design-system": "file:../CXC_PLATAFORMA_DESIGN_SYSTEM",
     "date-fns": "^4.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
