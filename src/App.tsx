@@ -1,12 +1,11 @@
 import AppRoutes from "./routes";
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from './services/queryClient';
+import Providers from "./Providers";
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
+    <Providers>
       <AppRoutes />
-    </QueryClientProvider>
+    </Providers>
   )
 }
 

@@ -1,8 +1,9 @@
 import axios from 'axios';
+import env from '../config/env';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://api.exemplo.com',
-  timeout: 10000,
+  baseURL: env.VITE_HTTP_API || '',
+  timeout: env.VITE_API_TIMEOUT,
 });
 
 api.interceptors.request.use((config) => {

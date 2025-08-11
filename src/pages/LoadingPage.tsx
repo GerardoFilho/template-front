@@ -7,10 +7,8 @@ const LoadingPage = () => {
         alignItems: 'center'
     }}>
         {/* <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='#030067' size='xl' /> */}
-        <Loading />
-        <h1 style={{ fontWeight: 'bold' }}>Carregando...</h1>
-
+        <Loading label="Carregando" />
+        
     </div>);
 }
-
 export default memo(LoadingPage);

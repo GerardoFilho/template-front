@@ -2,6 +2,7 @@ import { styled } from "@stitches/react";
 
 export const Item = styled("div", {
   display: "flex",
+  gap: "0.5rem",
   alignItems: "center",
   justifyContent: "space-between",
   padding: "0.75rem",
@@ -23,9 +24,16 @@ export const Item = styled("div", {
   },
 });
 
-export const Text = styled("span", {
+export const Text= styled("span", {
   flex: 1,
   marginLeft: "0.75rem",
+  variants: {
+    complete: {
+      true: {
+        textDecoration: "line-through",
+      },
+    }
+  }
 });
 
 export const Checkbox = styled("input", {

@@ -12,6 +12,6 @@ export const Header = styled("header", {
 });
 
 export const Highlight = styled("span", {
-  color: "blue",
+  // color: "blue",
   fontStyle: "italic",
 });

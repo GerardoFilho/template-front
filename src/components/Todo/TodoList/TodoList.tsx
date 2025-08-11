@@ -6,7 +6,7 @@ const TodoList = () => {
   const todos = useTodoStore((s) => s.todos);
 
   const orderedTodos = [...todos].sort(
-    (a, b) => Number(a.done) - Number(b.done)
+    (a, b) => Number(a.id) - Number(b.id)
   );
 
   return (

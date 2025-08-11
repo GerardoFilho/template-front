@@ -1,30 +1,20 @@
-import { useState } from "react";
-import * as S from "./TodoInput.style";
-import { useTodoStore } from "../../../store/useTodoStore";
-import { Button } from "cxt-design-system";
+import { Button, Card, Input } from "cxt-design-system";
+import { memo } from "react";
 
-const TodoInput = () => {
-  const [text, setText] = useState("");
-  const addTodo = useTodoStore((s) => s.addTodo);
-
-  const handleAdd = () => {
-    if (text.trim()) {
-      addTodo(text);
-      setText("");
-    }
-  };
+type Props = {
+  value: string;
+  setValue: (e:string) => void;
+}
+const TodoInput = ({setValue,value}: Props) => {
 
   return (
-    <S.InputWrapper>
-      <S.Input
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Add a task..."
+      <Input
+        value={value}
+        width={'100%'}
+        onChange={(e) => setValue(e)}
+        placeholder="Adicione uma tarefa"
       />
-      {/* <S.AddButton onClick={handleAdd}>+</S.AddButton> */}
-      <Button onClick={handleAdd}>+</Button>
-    </S.InputWrapper>
   );
 };
 
-export default TodoInput;
+export default memo(TodoInput);

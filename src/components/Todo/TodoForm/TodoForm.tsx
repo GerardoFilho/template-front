@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useTodoStore } from "../../../store/useTodoStore";
-import { Form, Input } from "./TodoForm.style";
+import { Form, } from "./TodoForm.style";
 import { toast } from "react-toastify";
 import { useApiRequest } from "../../../hooks/useApiRequest";
-import {Button} from 'cxt-design-system'
+import {Button, Input} from 'cxt-design-system'
 
 const TodoForm = () => {
   const [text, setText] = useState("");
@@ -46,12 +46,12 @@ const TodoForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Input
+      {/* <Input
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => setText(e)}
         placeholder="Digite uma tarefa"
-      />
-      <Button type="submit">Adicionar</Button>
+      /> */}
+      {/* <Button type="submit">Adicionar</Button> */}
       {/* <SubmitButton type="submit">Adicionar</SubmitButton> */}
     </Form>
   );

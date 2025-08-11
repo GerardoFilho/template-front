@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import { lazy, Suspense } from "react";
 import LoadingPage from "../pages/LoadingPage";
+import { ErrorBoundary } from "../shared/ErrorBoundary/ErrorBoundary";
 
 const TodoPageLazy = lazy(() => import('../pages/Todo'));
 
@@ -12,7 +13,11 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<p> oi</p>} />
           <Route path="/todo" element={
-            <Suspense fallback={<LoadingPage />}><TodoPageLazy /></Suspense>} />
+            <ErrorBoundary>
+              <Suspense fallback={<LoadingPage />} ><TodoPageLazy /></Suspense>
+            </ErrorBoundary>
+          } />
+
         </Routes>
       </MainLayout>
     </BrowserRouter>
