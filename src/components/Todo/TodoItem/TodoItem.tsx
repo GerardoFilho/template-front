@@ -8,21 +8,26 @@ const TodoItem = ({ id, text, completed, deleted }: Todo) => {
   const restoreTodo = useTodoStore((s) => s.restoreTodo);
 
   return (
-    <Card sx={{ display: "flex", alignItems: "center", gap: 2, padding: 1, }}>
+    <Card sx={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2, padding: 1 }}>
       <S.Checkbox
         type="checkbox"
         disabled={deleted}
         checked={completed}
         onChange={() => toggleTodo(id)}
       />
-      <S.Text complete={deleted}>{text}</S.Text>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 1, padding: 1 }}>
+        <S.Text complete={deleted}>{text}</S.Text>
+        <S.Text style={{ border: '1px red solid' }}
+          complete={deleted}>{text}</S.Text>
+      </div>
       {
         deleted ?
           <Button color="success" size="small" sx={{ height: "2rem" }} onClick={() => restoreTodo(id)}><IconeFa.FaUndoAlt /></Button>
           :
           <Button disabled={deleted} color="error" size="small" sx={{ height: "2rem" }} onClick={() => removeTodo(id)}><IconeFa.FaTrashAlt /></Button>
       }
-    </Card>
+
+    </Card >
   );
 };
 

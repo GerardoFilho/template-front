@@ -1,55 +1,72 @@
-import axios from "axios";
-import env from "../config/env";
-import { useCallback } from "react";
+// src/hooks/useRequest.ts
+import { useQuery, useMutation, type UseQueryOptions, type UseMutationOptions } from "@tanstack/react-query";
+import api from "../services/api";
 
-type Props = {
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    endpoint: string;
-    params?: any;
-    body?: any;
-    key?: string;
+type RequestMethods = {
+  get: <T>(
+    key: string | any[],
+    url: string,
+    options?: UseQueryOptions<T>
+  ) => ReturnType<typeof useQuery<T>>;
+  post: <T, B = any>(
+    key: string | any[],
+    url: string,
+    body?: B,
+    options?: UseMutationOptions<T, unknown, B>
+  ) => ReturnType<typeof useMutation<T, unknown, B>>;
+  put: <T, B = any>(
+    key: string | any[],
+    url: string,
+    body?: B,
+    options?: UseMutationOptions<T, unknown, B>
+  ) => ReturnType<typeof useMutation<T, unknown, B>>;
+  delete: <T,>(
+    key: string | any[],
+    url: string,
+    options?: UseMutationOptions<T, unknown, void>
+  ) => ReturnType<typeof useMutation<T, unknown, void>>;
+};
+
+export function useRequest(): RequestMethods {
+  return {
+    get: (key, url, options) =>
+      useQuery({
+        queryKey: Array.isArray(key) ? key : [key],
+        queryFn: async () => {
+          const { data } = await api.get(url);
+          return data;
+        },
+        ...options,
+      }),
+
+    post: (key, url, body, options) =>
+      useMutation({
+        mutationKey: Array.isArray(key) ? key : [key],
+        mutationFn: async (vars: typeof body) => {
+          const { data } = await api.post(url, vars ?? body);
+          return data;
+        },
+        ...options,
+      }),
+
+    put: (key, url, body, options) =>
+      useMutation({
+        mutationKey: Array.isArray(key) ? key : [key],
+        mutationFn: async (vars: typeof body) => {
+          const { data } = await api.put(url, vars ?? body);
+          return data;
+        },
+        ...options,
+      }),
+
+    delete: (key, url, options) =>
+      useMutation({
+        mutationKey: Array.isArray(key) ? key : [key],
+        mutationFn: async () => {
+          const { data } = await api.delete(url);
+          return data;
+        },
+        ...options,
+      }),
+  };
 }
-
-type Response<T> = {
-    success: boolean;
-    statusCode: number;
-    data: T | null;
-    message: string;
-    error: any | null;
-}
-export const useRequest = () => {
-
-    const request = useCallback(async ({ method, endpoint, body, params }: Props) => {
-        const headers: any = {};
-        const token = sessionStorage.getItem('token');
-
-        if (token) {
-            headers.Authorization = `Bearer ${token}`;
-        }
-        const request: Response<any> = await axios.request({
-            method: method,
-            headers,
-            url: `${env.VITE_API_URL}/${endpoint}`,
-            params,
-            data: body,
-        }).then((e) => ({
-            success: true,
-            statusCode: e.status,
-            data: e.data,
-            message: 'OK',
-            error: null
-        }))
-            .catch((e) => ({
-                success: false,
-                statusCode: parseInt(e?.response?.status),
-                data: null,
-                message: String(e?.response?.data?.message || e?.message || 'Ops, aconteceu algo inesperado, tente novamente'),
-                error: e,
-            }));
-
-        return request;
-    }, []);
-
-    return request;
-}
-
