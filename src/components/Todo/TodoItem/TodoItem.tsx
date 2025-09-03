@@ -15,10 +15,10 @@ const TodoItem = ({ id, text, completed, deleted }: Todo) => {
         checked={completed}
         onChange={() => toggleTodo(id)}
       />
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 1, padding: 1 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 1, padding: 1, border: '1px red solid', width: "100%" }}>
         <S.Text complete={deleted}>{text}</S.Text>
-        <S.Text style={{ border: '1px red solid' }}
-          complete={deleted}>{text}</S.Text>
+        {/* <S.Text style={{ border: '1px red solid' }}
+          complete={deleted}>{text}</S.Text> */}
       </div>
       {
         deleted ?

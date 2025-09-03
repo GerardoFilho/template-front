@@ -27,7 +27,7 @@ const TodoPage = () => {
   return (
     <Card style={{ padding: 5, display: "flex", flexDirection: "column", gap: "1rem" }}>
       <TodoHeader />
-      <Card style={{ padding: 5, display: "flex", flexDirection: "row", gap: "1rem", height: 40 }}>
+      <Card style={{ padding: 5, display: "flex", flexDirection: "row", gap: "1rem", }}>
         <Input
           value={text}
           // sx={{ height: "2rem" }}
