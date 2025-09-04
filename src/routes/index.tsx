@@ -4,6 +4,8 @@ import { lazy, Suspense } from "react";
 import LoadingPage from "../pages/LoadingPage";
 import { ErrorBoundary } from "../shared/ErrorBoundary/ErrorBoundary";
 
+const HomePageLazy = lazy(() => import('../pages/Home'));
+const ProductStorePageLazy = lazy(() => import('../pages/ProductStore'));
 const TodoPageLazy = lazy(() => import('../pages/Todo'));
 
 const AppRoutes = () => {
@@ -11,7 +13,8 @@ const AppRoutes = () => {
     <BrowserRouter>
       <MainLayout>
         <Routes>
-          <Route path="/" element={<p> oi</p>} />
+          <Route path="/" element={<HomePageLazy />} />
+          <Route path="/loja" element={<ProductStorePageLazy />} />
           <Route path="/todo" element={
             <ErrorBoundary>
               <Suspense fallback={<LoadingPage />} ><TodoPageLazy /></Suspense>

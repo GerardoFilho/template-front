@@ -3,7 +3,7 @@ import { useTodoStore } from "../../../store/useTodoStore";
 import { Form, } from "./TodoForm.style";
 import { toast } from "react-toastify";
 import { useApiRequest } from "../../../hooks/useApiRequest";
-import {Button, Input} from 'cxt-design-system'
+import { Loading } from 'cxt-design-system'
 
 const TodoForm = () => {
   const [text, setText] = useState("");
@@ -27,7 +27,6 @@ const TodoForm = () => {
   const onLoading = async () => {
     setIsLoadingPage(true);
     if (isSuccess) {
-      //TODO : Add todos to store
       data
     } else {
       toast.error('Ops, aconteceu algo inesperado, tente novamente');
@@ -40,7 +39,7 @@ const TodoForm = () => {
   }, []);
 
 
-  if(isPending) return <div>Carregando...</div>
+  if (isPending) return <Loading />
 
 
 

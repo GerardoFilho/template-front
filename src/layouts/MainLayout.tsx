@@ -4,6 +4,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <S.Wrapper>
       <S.Header>
         <S.NavLink to="/">Home</S.NavLink>
+        <S.NavLink to="/loja">Loja Fake</S.NavLink>
         <S.NavLink to="/todo">To-do</S.NavLink>
       </S.Header>
       <S.Main>{children}</S.Main>
