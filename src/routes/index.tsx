@@ -14,7 +14,11 @@ const AppRoutes = () => {
       <MainLayout>
         <Routes>
           <Route path="/" element={<HomePageLazy />} />
-          <Route path="/loja" element={<ProductStorePageLazy />} />
+          <Route path="/loja" element={
+            <ErrorBoundary>
+              <Suspense fallback={<LoadingPage />} ><ProductStorePageLazy /></Suspense>
+            </ErrorBoundary>
+          } />
           <Route path="/todo" element={
             <ErrorBoundary>
               <Suspense fallback={<LoadingPage />} ><TodoPageLazy /></Suspense>

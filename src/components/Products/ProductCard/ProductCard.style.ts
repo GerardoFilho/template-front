@@ -6,6 +6,12 @@ export const Card = styled("div", {
     padding: 16,
     borderRadius: 8,
     background: "lightsteelblue",
+    cursor: "pointer",
+    transition: 'background-color 0.3s ease', 
+
+      '&:hover': {
+        backgroundColor: 'lightblue',
+      },
 });
 
 export const Image = styled("img", {

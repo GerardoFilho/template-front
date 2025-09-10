@@ -1,9 +1,12 @@
 import { create } from "zustand";
 import type { Product } from "../types/Products";
-import axios from "axios";
+import httpFakestore from "../services/fakestore";
+import type { IRequest } from "../types/Request";
 
 interface ProductStore {
     products: Product[];
+    selectedProduct: Product | null;
+    findProductById: (id: number) => Promise<IRequest<Product>> | null;
     loading: boolean;
     error: string | null;
     categoryFilter: string;
@@ -17,22 +20,28 @@ interface ProductStore {
 export const useProductStore = create<ProductStore>((set) => ({
     products: [],
     loading: false,
+    selectedProduct: null,
     error: null,
     categoryFilter: "all",
     searchQuery: "",
     fetchProducts: async () => {
-        try {
-            set({ loading: true, error: null });
 
-            const response = await axios.get<Product[]>("https://fakestoreapi.com/products");
+        set({ loading: true, error: null });
 
-            set({ products: response.data });
-        } catch (error) {
-            console.error(error);
-            set({ error: "Erro ao carregar produtos" });
-        } finally {
-            set({ loading: false });
-        }
+        const request = await httpFakestore.get('products')
+            .then((response) => ({ data: response.data, success: true, error: null, message: 'OK!' }))
+            .catch((error) => ({ data: null, success: false, error: error, message: error.message }));
+
+        set({ products: request.data, loading: false, error: request.error });
+    },
+    findProductById: async (id: number) => {
+        set({ selectedProduct: null })
+        const request = await httpFakestore.get(`products/${id}`)
+            .then((response) => ({ data: response.data, success: true, error: null, message: 'OK!' }))
+            .catch((error) => ({ data: null, success: false, error: error, message: error.message }));
+
+        if (request.success) set({ selectedProduct: request.data })
+        return request;
     },
     setCategoryFilter: (category) => set({ categoryFilter: category }),
     setSearchQuery: (query) => set({ searchQuery: query }),

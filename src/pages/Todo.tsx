@@ -5,6 +5,7 @@ import TodoList from "../components/Todo/TodoList/TodoList";
 import { useTodoStore } from "../store/useTodoStore";
 import { toast } from "react-toastify";
 import { useKeyPress } from "../hooks/useKeyPress";
+import { useRequest } from "../hooks/useRequest";
 
 const TodoPage = () => {
 
@@ -12,8 +13,9 @@ const TodoPage = () => {
 
   const addTodo = useTodoStore((s) => s.addTodo);
 
+  const {get} = useRequest();
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     if (text.trim().length > 0) {
       addTodo(text);
       setText("");

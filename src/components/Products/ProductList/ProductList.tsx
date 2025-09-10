@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useProductStore } from "../../../store/useProductStore";
-import { ProductCard } from "../ProductCard/ProductCard";
+import ProductCard  from "../ProductCard/ProductCard";
 import { Loading } from "cxt-design-system";
 import * as S from "./ProductList.style"
 
@@ -16,7 +16,7 @@ export function ProductList() {
     } = useProductStore();
 
     useEffect(() => {
-        fetchProducts();
+        void fetchProducts();
     }, []);
 
     const filtered = products.filter((product) => {

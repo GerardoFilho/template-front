@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { compression } from 'vite-plugin-compression2';
+import packageJson from "./package.json";
 
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'production';
@@ -16,6 +17,9 @@ export default defineConfig(({ mode }) => {
         include: /\.(js|mjs|json|css|html|svg)$/i,
       }),
     ],
+    define:{
+       __APP_VERSION__: JSON.stringify(packageJson.version),
+    },
     build: {
       target: 'esnext',
       minify: 'esbuild',

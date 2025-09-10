@@ -6,12 +6,11 @@ const ProductStorePage = () => {
 
     return (
         <>
-            <h1>Loja Fake</h1>
+            <h1>Loja fake</h1>
             <SearchInput />
             <ProductFilter />
             <ProductList />
         </>
     );
 };
-
-export default ProductStorePage;
+ export default ProductStorePage;
